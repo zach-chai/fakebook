@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @bookcode.code %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @bookcode.title %>
+</p>
+
+<p>
+  <strong>Format:</strong>
+  <%= @bookcode.format %>
+</p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @bookcode.filename %>
+</p>
+
+<p>
+  <strong>Page offset:</strong>
+  <%= @bookcode.page_offset %>
+</p>
+
+<%= link_to 'Edit', edit_bookcode_path(@bookcode) %> |
+<%= link_to 'Back', bookcodes_path %>

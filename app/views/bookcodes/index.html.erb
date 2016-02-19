@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Bookcodes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Title</th>
+      <th>Format</th>
+      <th>Filename</th>
+      <th>Page offset</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bookcodes.each do |bookcode| %>
+      <tr>
+        <td><%= bookcode.code %></td>
+        <td><%= bookcode.title %></td>
+        <td><%= bookcode.format %></td>
+        <td><%= bookcode.filename %></td>
+        <td><%= bookcode.page_offset %></td>
+        <td><%= link_to 'Show', bookcode %></td>
+        <td><%= link_to 'Edit', edit_bookcode_path(bookcode) %></td>
+        <td><%= link_to 'Destroy', bookcode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bookcode', new_bookcode_path %>
