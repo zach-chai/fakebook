@@ -1,3 +1,9 @@
+require 'sqlite3'
+
+db = SQLite3::Database.new "db/db_3005fakebooks"
+
+update = db.prepare "UPDATE songs SET title = 'zach is a boss' WHERE ID = ?"
+
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
 
@@ -40,8 +46,9 @@ class SongsController < ApplicationController
   # PATCH/PUT /songs/1
   # PATCH/PUT /songs/1.json
   def update
+
     respond_to do |format|
-      if @song.update(song_params)
+      if @song.update_song(song_params['title'], song_params['bookcode'], song_params['page'])
         format.html { redirect_to @song, notice: 'Song was successfully updated.' }
         format.json { render :show, status: :ok, location: @song }
       else
@@ -54,7 +61,7 @@ class SongsController < ApplicationController
   # DELETE /songs/1
   # DELETE /songs/1.json
   def destroy
-    @song.destroy
+    @song.delete_song
     respond_to do |format|
       format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
       format.json { head :no_content }
