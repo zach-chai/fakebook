@@ -11,6 +11,8 @@ $(document).on 'ready page:load', ->
         <td>#{song.bookcode}</td>
         <td>#{song.page}</td>
         <td>#{song.title}</td>
+        <td><a href='/songs/#{song.id}/edit'>edit</a></td>
+        <td><a href='/songs/#{song.id}/delete'>delete</a></td>
       </tr>"
 
   $(".book").click ->
