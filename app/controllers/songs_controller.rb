@@ -5,7 +5,7 @@ db = SQLite3::Database.new "db/db_3005fakebooks"
 update = db.prepare "UPDATE songs SET title = 'zach is a boss' WHERE ID = ?"
 
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :edit, :update, :destroy]
+  before_action :set_song, only: [:show, :edit, :update, :destroy, :delete]
 
   # GET /songs
   # GET /songs.json
@@ -58,10 +58,18 @@ class SongsController < ApplicationController
     end
   end
 
+  def delete
+  end
+
   # DELETE /songs/1
   # DELETE /songs/1.json
   def destroy
-    @song.delete_song
+    if song_params[:id].blank?
+      @song.delete_songs(song_params['title'], song_params['bookcode'], song_params['page'])
+    else
+      @song = Song.find(song_params[:id])
+      @song.delete_song
+    end
     respond_to do |format|
       format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
       format.json { head :no_content }
@@ -76,6 +84,6 @@ class SongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.require(:song).permit(:bookcode, :page, :title)
+      params.require(:song).permit(:bookcode, :page, :title, :id)
     end
 end

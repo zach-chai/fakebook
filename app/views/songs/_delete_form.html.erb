@@ -1,0 +1,33 @@
+<%= form_for(@song, :html => { :method => :delete}) do |f| %>
+  <% if @song.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>
+
+      <ul>
+      <% @song.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :bookcode %><br>
+    <%= f.text_area :bookcode %>
+  </div>
+  <div class="field">
+    <%= f.label :page %><br>
+    <%= f.number_field :page %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_area :title %>
+  </div>
+  <div class="field">
+    <%= f.label :id %><br>
+    <%= f.number_field :id %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Delete Song" %>
+  </div>
+<% end %>
