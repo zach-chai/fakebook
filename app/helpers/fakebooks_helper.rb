@@ -1,0 +1,2 @@
+module FakebooksHelper
+end

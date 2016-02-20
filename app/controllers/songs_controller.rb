@@ -1,16 +1,21 @@
 require 'sqlite3'
 
-db = SQLite3::Database.new "db/db_3005fakebooks"
-
-update = db.prepare "UPDATE songs SET title = 'zach is a boss' WHERE ID = ?"
-
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy, :delete]
 
   # GET /songs
   # GET /songs.json
   def index
+
     @songs = Song.all
+
+    if params['bookcode'].present?
+      @songs = @songs.where bookcode: params['bookcode']
+    end
+
+    if params['title'].present?
+      @songs = @songs.where title: params['title']
+    end
   end
 
   # GET /songs/1
