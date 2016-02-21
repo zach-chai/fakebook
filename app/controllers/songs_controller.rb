@@ -9,12 +9,14 @@ class SongsController < ApplicationController
 
     @songs = Song.all
 
-    if params['bookcode'].present?
-      @songs = @songs.where bookcode: params['bookcode']
-    end
-
     if params['title'].present?
-      @songs = @songs.where title: params['title']
+      if params['bookcode'].present?
+        @songs = @songs.filter_book_songs params['title'], params['bookcode']
+      else
+        @songs = @songs.filter_songs params['title']
+      end
+    elsif params['bookcode'].present?
+      @songs = @songs.where bookcode: params['bookcode']
     end
   end
 

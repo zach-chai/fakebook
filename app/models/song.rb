@@ -1,7 +1,6 @@
 class Song < ActiveRecord::Base
 
-    @@db = SQLite3::Database.new "db/db_3005fakebooks"
-
+  @@db = SQLite3::Database.new "db/db_3005fakebooks"
 
   def update_song(title, code, page)
     update_stm = @@db.prepare "UPDATE songs SET title = ?, bookcode = ?, page = ? WHERE ID = ?"
@@ -16,7 +15,6 @@ class Song < ActiveRecord::Base
   end
 
   def delete_songs(title, code, page)
-    byebug
     query = "DELETE FROM songs WHERE"
 
     if title.present?
@@ -55,6 +53,16 @@ class Song < ActiveRecord::Base
     end
 
     delete_stm.execute
+  end
+
+  class << self
+    def filter_songs(title)
+      where 'title like (?)', "%#{title}%"
+    end
+
+    def filter_book_songs(title, book)
+      where 'title like (?) and bookcode = (?)', "%#{title}%", book
+    end
   end
 
 end
