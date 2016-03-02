@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root 'fakebooks#index'
+  
   get 'fakebooks' => 'fakebooks#index'
 
   resources :bookcodes
