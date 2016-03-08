@@ -1,2 +1,2 @@
 # fakebook
-An app to manage fakebooks written in ruby
+An app to manage fakebooks with the purpose of practicing raw sqlite queries
